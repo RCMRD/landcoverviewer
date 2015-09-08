@@ -1,0 +1,129 @@
+Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
+{
+	extend: 'GeoExt.panel.Map',
+	alias: 'widget.GeoExtMapPanel',
+	id: 'GeoExtMapPanelId',
+	border: 'false',
+	layout: 'fit',
+	region: 'center',
+	width: '100%',
+	height:'100%',
+	center: '29.577899,3.443310',
+	zoom: 11,
+	initComponent: function() 
+	{
+		var me = this,
+		items = [],
+		ctrl;
+
+		map = new OpenLayers.Map('map', options);
+		map.addControl(new OpenLayers.Control.LayerSwitcher());
+		map.addControl(new OpenLayers.Control.Navigation({dragPanOptions: {enableKinetic: true}})); 
+		map.addControl(new OpenLayers.Control.Scale());
+		map.addControl(new OpenLayers.Control.LoadingPanel()); 
+
+        africa_outline = new OpenLayers.Layer.Vector( "Africa", {
+            isBaseLayer: true, displayInLayerSwitcher: true, visibility: true,
+            projection:  new OpenLayers.Projection('EPSG:4326'),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP
+            ({
+                    url:  "data/webmapping/africa.json",
+                    format: new OpenLayers.Format.GeoJSON
+                    ({
+                        extractStyles: true,
+                        extractAttributes: true
+                    })
+                })
+        });
+        ///Baselayers
+        var gphy = new OpenLayers.Layer.Google(
+            "Google Physical Terrain",
+            {isBaseLayer: true, type: google.maps.MapTypeId.TERRAIN, visibility:false, transitionEffect: 'resize'}
+            );
+
+        var gmap = new OpenLayers.Layer.Google(
+                    "Google Streets", // the default
+                    {isBaseLayer: true,numZoomLevels: 20,visibility:false, transitionEffect: 'resize'}
+                    );
+
+        var ghyb = new OpenLayers.Layer.Google(
+            "Google Hybrid",
+            {isBaseLayer: true,type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22,visibility:false, transitionEffect: 'resize'}
+            );
+
+        var gsat = new OpenLayers.Layer.Google(
+            "Google Satellite",
+            {isBaseLayer: true,type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 20,visibility:false, transitionEffect: 'resize'}
+            );
+
+        var mapbox_street = new OpenLayers.Layer.XYZ("Mapbox Street",
+            ["http://a.tiles.mapbox.com/v4/mapbox.streets/${z}/${x}/${y}.png?access_token=pk.eyJ1Ijoid29uZGllIiwiYSI6InlKcXpXT1UifQ.BQ3hMXdyffGusTRN8JnWOg"], {
+                sphericalMercator: true,
+                wrapDateLine: true,
+                numZoomLevels: 20,
+                transitionEffect: 'resize'
+            });
+
+
+
+
+        var maxExtent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
+        restrictedExtent = maxExtent.clone();
+        maxResolution = 156543.0339;
+
+        var options = {
+            projection: new OpenLayers.Projection("EPSG:900913"),
+            displayProjection: new OpenLayers.Projection("EPSG:4326"),
+            units: "m",
+            numZoomLevels: 20,
+            maxResolution: maxResolution,
+			//maxExtent: maxExtent,
+			sphericalMercator: true,
+			restrictedExtent: restrictedExtent
+		};
+
+		map.addControl(new OpenLayers.Control.MousePosition
+			(	{
+				id:'MousePosition_id',
+			
+				numDigits: 6,
+				prefix: '(Lon/Lat)',
+				emptyString: '',
+				displayProjection: "EPSG:4326"
+			}
+			));
+		
+		zoomInCtrl = new OpenLayers.Control.ZoomIn();
+		map.addControl(zoomInCtrl);
+
+		zoomOutCtrl = new OpenLayers.Control.ZoomOut();
+		map.addControl(zoomOutCtrl);
+		
+		navigationHistoryCtrl = new OpenLayers.Control.NavigationHistory();
+		map.addControl(navigationHistoryCtrl);
+
+
+
+        //When there is internet use this
+        map.addLayers([mapbox_street, gmap, gphy, ghyb, gsat]);
+
+        //No Internet
+        //map.addLayers([africa_outline]);
+
+		map.setCenter(new OpenLayers.LonLat(29.577899,3.443310).transform(
+			new OpenLayers.Projection("EPSG:4326"),
+			map.getProjectionObject()
+			), 5 );
+
+
+    Ext.apply(me, 
+    {
+    	map: map
+
+    });
+
+
+    me.callParent(arguments);
+}
+});
