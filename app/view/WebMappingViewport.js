@@ -200,24 +200,6 @@ WestPanel = new Ext.Panel({
 
 
 
- 	statusbar = new Ext.Panel({
-        region: 'south',
-        id: 'statusbar', 
-		xtype: 'panel',
-        width: 350,
-        height: 35,
-        bbar: Ext.create('Ext.ux.StatusBar', {
-            defaultText: '',
-             height: 35,
-             bodyStyle: 'padding-top:25px;',
-            // bodyStyle: 'padding:15px;',
-            id: 'statusbar_content_id',
-            cls: 'statusbar_content'
-
-        })
-    });
-
-
 Ext.define('LandCover.view.WebMappingViewport',
 {
     extend: 'Ext.container.Viewport',
@@ -240,14 +222,12 @@ Ext.define('LandCover.view.WebMappingViewport',
 					html: '<div class="fire"><div class="satimage"><div class="fireimage"><div class="topcont">' +
                     '<div class="logobox"><a target="new" href="http://rcmrd.org/"><img alt="RCMRD" width="153"' +
                     ' height="53" class="rcmrd" src="assets/images/rcmrd.png"></a></div><h1 class="topheader">'+
-					'Flood Simulator</h1></div></div></div></div>'
+					'Land Cover Viewer</h1></div></div></div></div>'
 				},
 				{
 					xtype: 'MapPanel'
 				},
-                //Navigation,
-                 WestPanel,
-				statusbar
+                 WestPanel
 			]
         });
         me.callParent(arguments);
