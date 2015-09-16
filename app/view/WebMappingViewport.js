@@ -19,10 +19,11 @@ layers_tree_store = Ext.create('Ext.data.TreeStore', {
 	}
 });
 
-layer_legend_tree = Ext.create('GeoExt.tree.Panel', 
-{
+layer_legend_tree = Ext.create('GeoExt.tree.Panel', {
 	title: "Layers",
 	autoScroll: true,
+    collapsible: true,
+    //preventHeader: true,
  	viewConfig:
 	{
 		plugins: [{
@@ -58,22 +59,7 @@ layer_legend_tree = Ext.create('GeoExt.tree.Panel',
 	lines: false
 });
 
-legendPanel = Ext.create ('GeoExt.LegendPanel',{
-	defaults: 
-	{
-		labelCls: '',
-		style: 'padding:0px 0px 10px 0px'
-	},
-	bodyStyle: 'padding:5px',
 
-	title: "Legend",
-	height: 300, 
-    autoScroll: true,
-	collapsible: true,
-	lines: false,
-	id:"legend_items",
-	layers: []
-});
 
 LogoPanel = new Ext.Panel({  
     region: 'south',      
@@ -82,8 +68,6 @@ LogoPanel = new Ext.Panel({
     height: 90,
     width: 330,
     minWidth: 260,
-   // collapsed:true,
-   //animCollapse: true,
     collapsible: true,
     collapseMode: 'mini',
     preventHeader: true,
@@ -97,39 +81,15 @@ LogoPanel = new Ext.Panel({
         }
     ]
 }); 
-	
-GeoExtPanel = new Ext.Panel ({
-	region: 'west',
-	xtype: 'panel',
-	width: 300,
-	minWidth: 200,
-    height: 400, 
-	active:true,
-   // maxWidth: 500,
-    listeners: {
-        resize: Ext.Function.bind(function(comp, width, height,
-                oldWidth, oldHeight, eOpts) {
-            comp.doLayout();
-        }, this)
-    },
-	title: 'Map Elements',
-	collapsible: true,
-	split: true,
-	items: [layer_legend_tree, legendPanel]
-
-});	
-
-
-
 
 
 
 
 SingleSearchForm = Ext.create('Ext.form.Panel', {
-   // width: 300,
     bodyPadding: 10,
     id: 'single_search_id', 
-    title: 'Single Search',
+    title: 'Search',
+    collapsible: true,
     items: [
 
         {
@@ -157,50 +117,109 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
 	]
 });
 
+ function fix_to_bottom(){
 
-
-var GeneralTabs = Ext.create('Ext.tab.Panel', {
-	id: "generaltabsID",
-	layout: 'card',
-	region: 'west',
-	width:330,
-	minWidth:200,
-    height: 400, 
-	animate: true,
-	preventHeader: true,
-     hideCollapseTool: true,
-	collapsible: true,
-    activeTab: 0,
-    split: true,
-    tabPosition: 'top',
-    items: [
-    	    GeoExtPanel, 
-        {
-            title: 'Search',
-            items:[SingleSearchForm]
-        }
-    ]
-});
+     if (legend_popup.collapsed){
+         legend_popup.anchorTo("GeoExtMapPanelId", "bl", [0, -30]);
+     }else {
+         legend_popup.anchorTo("GeoExtMapPanelId", "bl", [0, -235]);
+     }
+ }
 
 WestPanel = new Ext.Panel({  
     region: 'west',
     xtype: 'panel',
-    layout:'border',
-    width: 330,
+    width: 300,
     minWidth: 200,
-    //height: 400, 
-    active:true,
     collapsible: true,
-    preventHeader: true,
-    hideCollapseTool: true,
+    title: 'Layers and Search',
+   // preventHeader: true,
+    //  hideCollapseTool: true,
     split: true,
-    items: [GeneralTabs, LogoPanel]
+    items: [layer_legend_tree, SingleSearchForm, LogoPanel],
+    listeners: {
+        collapse: function() {
+            fix_to_bottom();
+        },
+        expand: function() {
+            fix_to_bottom();
+        }
+    }
 
-}); 
+});
 
 
+ legendPanel = Ext.create ('GeoExt.LegendPanel', {
+     bodyStyle: 'padding:5px',
+     autoScroll: true,
+     header:false,
+     id:"legend_id",
+     width:200,
+     height:205,
+     collapsible: true,
+     defaults: {
+         style: 'padding:5px',
+         baseParams: {
+             FORMAT: 'image/png',
+             LEGEND_OPTIONS: 'forceLabels:on;fontName=Verdana;fontSize:12',
+             WIDTH:'16',
+             HEIGHT:'12'
+         }
+     },
+     lines: false,
+     layers: []
+ });
 
-Ext.define('LandCover.view.WebMappingViewport',
+ legend_popup = new Ext.Window({
+     extend: 'Ext.window.Window',
+     title:'Legend',
+     width: 200,
+     id:'legend_popup_id',
+     minimizable: true,
+     closable:false,
+     collapseDirection: Ext.Component.DIRECTION_BOTTOM,
+     items:[legendPanel],
+     listeners: {
+         show: function() {
+             Ext.select('#legend_popup_id .x-tool-restore').setStyle('display', 'none');
+             Ext.select('#legend_popup_id .x-tool-minimize').setStyle('display', 'block');
+         },
+         "minimize": function (window, opts) {
+             window.collapse();
+             window.setWidth(150);
+             window.anchorTo("GeoExtMapPanelId", "bl", [0, -30]);
+             Ext.select('#legend_popup_id .x-tool-restore').setStyle('display', 'block');
+             Ext.select('#legend_popup_restore_id').setStyle('left', '122px');
+             Ext.select('#legend_popup_restore_id').setStyle('z-index', '100');
+             Ext.select('#legend_popup_id .x-tool-minimize').setStyle('display', 'none');
+         }
+     },
+     tools: [{
+         type: 'restore',
+         id: 'legend_popup_restore_id',
+         handler: function (evt, toolEl, owner, tool) {
+             var window = owner.up('window');
+             window.setWidth(200);
+             window.expand('', false);
+             window.anchorTo("GeoExtMapPanelId", "bl", [0, -235]);
+             Ext.select('#legend_popup_id .x-tool-restore').setStyle('display', 'none');
+             Ext.select('#legend_popup_id .x-tool-minimize').setStyle('display', 'block');
+         }
+     }]
+ });
+
+ Ext.onReady(function(){
+
+
+     legend_popup.show();
+     legend_popup.anchorTo("GeoExtMapPanelId", "bl", [0, -235]);
+     window.onresize = function() {
+         fix_to_bottom();
+     };
+
+ });
+
+ Ext.define('LandCover.view.WebMappingViewport',
 {
     extend: 'Ext.container.Viewport',
     alias: 'widget.WebMappingViewport',

@@ -367,15 +367,15 @@ background-image: linear-gradient(top #F0F1F1,#D4D0BF);
   color: #777;
 }
 .x-btn-default-small {
-    background: #AFA399;
-    box-shadow: 0px 3px 0px 0px #8D8F90;
+    background: #2D8A4C;
+    box-shadow: 0px 3px 0px 0px #40B0AA;
     border-radius: 5px;
     font-size: 22px;
     text-decoration: none;
     margin: 20px;
     position: relative;
     display: inline-block;
-    border-color: #8F9192;
+    border-color: #4C985A;
     color: #FFFFFF !important;
 }
 
@@ -387,7 +387,7 @@ background-image: linear-gradient(top #F0F1F1,#D4D0BF);
 }
 
 .x-btn-default-small:hover {
-    background-color: #525C61;
+    background-color: #3B8C5E;
     color: #FFFFFF !important;
 }
 div#toolbar-1022-innerCt, div#toolbar-1024-innerCt,div#toolbar-1026-innerCt{
