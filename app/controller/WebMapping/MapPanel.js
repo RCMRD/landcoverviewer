@@ -12,7 +12,8 @@ Ext.require([
 	'Ext.util.Point',
 	'GeoExt.container.VectorLegend',
 	'GeoExt.window.Popup',
-	'GeoExt.panel.Legend'
+	'GeoExt.panel.Legend',
+    'GeoExt.container.WmsLegend'
 ]);
 
 var map,africa_outline;

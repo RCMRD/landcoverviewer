@@ -65,6 +65,23 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 transitionEffect: 'resize'
             });
 
+        var mapquest = new OpenLayers.Layer.XYZ(
+            "Imagery",
+            [
+                "http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png",
+                "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png",
+                "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png",
+                "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"
+            ],
+            {
+                sphericalMercator: true,
+                wrapDateLine: true,
+                numZoomLevels: 20,
+                //attribution: "Tiles Courtesy of <a href='http://open.mapquest.co.uk/' target='_blank'>MapQuest</a>. Portions Courtesy NASA/JPL-Caltech '>",
+                transitionEffect: "resize"
+            }
+        );
+
         var ghg_wms = new OpenLayers.Layer.WMS("Tanzania 2000 Scheme I",
                     "http://geoportal.rcmrd.org/geoserver/wms",
                     {
@@ -123,15 +140,15 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ghg_wms, mapbox_street, gmap, gphy, ghyb, gsat]);
+        map.addLayers([ghg_wms, mapquest, mapbox_street]);
 
         //No Internet
         //map.addLayers([africa_outline]);
 
-		map.setCenter(new OpenLayers.LonLat(29.577899,3.443310).transform(
+		map.setCenter(new OpenLayers.LonLat(34.224046,-5.613931).transform(
 			new OpenLayers.Projection("EPSG:4326"),
 			map.getProjectionObject()
-			), 5 );
+			), 6 );
 
 
     Ext.apply(me, 

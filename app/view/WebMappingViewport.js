@@ -167,7 +167,7 @@ WestPanel = new Ext.Panel({
          }
      },
      lines: false,
-     layers: []
+     layers: ["Tanzania 2000 Scheme I"]
  });
 
  legend_popup = new Ext.Window({
