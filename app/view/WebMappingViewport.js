@@ -1,3 +1,12 @@
+ Ext.define('Download', {
+     extend: 'Ext.data.Model',
+     fields: [
+         {name: 'label1', type: 'string'},
+         {name: 'url1',  type: 'string'}
+        
+     ]
+ });
+
  //var conservation_area_store_url;
 layers_tree_store = Ext.create('Ext.data.TreeStore', {
 	model: 'GeoExt.data.LayerTreeModel',
@@ -88,34 +97,93 @@ LogoPanel = new Ext.Panel({
 SingleSearchForm = Ext.create('Ext.form.Panel', {
     bodyPadding: 10,
     id: 'single_search_id', 
-    title: 'Search',
+    title: 'Select',
     collapsible: true,
     items: [
 
-        {
-            xtype: 'datefield',
-            anchor: '100%',
-            id: 'single_date_search_id',
-            fieldLabel: 'Select a Date',
-            name: 'one_date',
-            //value: new Date(),
-           // renderer: Ext.util.Format.dateRenderer('Y-m-d'),
-            format:'Y-m-d',
-            submitFormat: 'Y-m-d',
-            submitValue : true,
-            maxValue: new Date()  // limited to the current date or prior
-        }
+                {
+                    xtype: 'combobox',
+                    fieldLabel: 'Country',
+                    name: 'country',
+                    id: 'country',
+                    store: Ext.create('Ext.data.ArrayStore', {
+                        fields: ['_value'],
+                        data : Ext.ghg.countries 
+                    }),
+                    valueField: '_value',
+                    displayField: '_value',
+                    typeAhead: true,
+                    queryMode: 'local',
+                    emptyText: 'Select country...',
+                    listeners:{
+                        'select': function(valueField){
+                            
+                        }
+                    }
+                },{
+                    xtype: 'radiofield',
+                    name: 'scheme',
+                    value: 'scheme1',
+                    fieldLabel: 'Classification Scheme',
+                    boxLabel: 'Scheme I'
+                },{
+                    xtype: 'radiofield',
+                    name: 'scheme',
+                    value: 'scheme2',
+                    fieldLabel: '',
+                    boxLabel: 'Scheme II'
+                },{
+                    xtype: 'combobox',
+                    fieldLabel: 'Year',
+                    disabled: false,
+                    name: 'year',
+                    id: 'year',
+                    store: Ext.create('Ext.data.ArrayStore', {
+                        fields: ['_value'],
+                        data : Ext.ghg.years 
+                    }),
+                    valueField: '_value',
+                    displayField: '_value',
+                    typeAhead: true,
+                    queryMode: 'local',
+                    emptyText: 'Select year...'
+                }
+
     ],
     buttons:
 	[
 		{
-			text: 'Search',
+			text: 'Statistics',
             id:'singleSearchButtonId',
 			width: 50,
 			action: 'singleSearchAction'
 		}
 	]
 });
+
+ // create the Downloads Store
+   var downstore = Ext.create('Ext.data.Store', {
+    model: 'Download',
+    data: [
+        //{label1: 'Nzoia Results'}
+
+    ]
+
+   });
+
+    // create the grid
+    var downloads = Ext.create('Ext.grid.Panel', {
+        store: downstore,
+        id: 'downgrid',
+        columns: [
+            {text: "Downloads", width: 180, dataIndex: 'label1'}
+            
+            
+        ],
+        //renderTo:'example-grid',
+        width: 200,
+        height: 100
+    });
 
  function fix_to_bottom(){
 
@@ -132,11 +200,11 @@ WestPanel = new Ext.Panel({
     width: 300,
     minWidth: 200,
     collapsible: true,
-    title: 'Layers and Search',
+    title: 'Map',
    // preventHeader: true,
     //  hideCollapseTool: true,
     split: true,
-    items: [layer_legend_tree, SingleSearchForm, LogoPanel],
+    items: [layer_legend_tree, SingleSearchForm, downloads, LogoPanel],
     listeners: {
         collapse: function() {
             fix_to_bottom();

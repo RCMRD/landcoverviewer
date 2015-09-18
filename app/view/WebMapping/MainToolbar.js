@@ -60,7 +60,7 @@ Ext.define('LandCover.view.WebMapping.MainToolbar',
 							icon: 'assets/images/redo.png',
 							action: 'navigation_history_next'
 						},
-						'-',
+						'-'/*,
 						{
 							xtype: 'combobox',
 							fieldLabel: '',
@@ -91,7 +91,7 @@ Ext.define('LandCover.view.WebMapping.MainToolbar',
 							tooltip: "Click to Zoom into the Selected Countries",
 							icon: 'assets/images/zoom-in-l.png',
 							action: 'zoom_to_countries'
-						}
+						}*/
 					]
 				}
 				, '->', 

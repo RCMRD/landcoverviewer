@@ -1,45 +1,23 @@
-//converts UTC date to local time. 
-function formatdate(stringval) {
-	stringvalUTC = stringval + ' UTC';
-  var newstr = stringvalUTC.replace(/-/g, '/');
-    var converted = new Date(newstr);
-    var d = converted;
-    //alert (d);
-    function addZero(n) {
-        return n < 10 ? '0' + n : '' + n;
-    }
-  Number.prototype.padLeft = function(base,chr){
-     var  len = (String(base || 10).length - String(this).length)+1;
-     return len > 0? new Array(len).join(chr || '0')+this : this;
-  }
-  
-  
-  return [ d.getFullYear(),(d.getMonth()+1).padLeft(),
-                    d.getDate().padLeft()].join('-')+
-                    ' ' +
-                  [ d.getHours().padLeft(),
-                    d.getMinutes().padLeft(),
-                    d.getSeconds().padLeft()].join(':');//return dateToPrint; 
+// some data used in the forms
+Ext.namespace('Ext.ghg');
 
-}
-//Resizes Legend panel based on screen size. 
-function resizeElementHeight(parent, child) {
-    var parent = document.getElementById(parent);
-    var child = document.getElementById(child);
-    var stylecont = document.createElement('div');
-    var height = 0;
-    var body = window.document.body;
-   // if (window.innerHeight) {
-        height = window.innerHeight;
-        //alert (height);
-        parentheight = ((height - 414) + "px");
-        childheight = ((height - 454) + "px");
-        stylecont.innerHTML = '<style>#legend_items{ height:'+parentheight+';}'+
-        	'#legend_items-body{ height:'+childheight+';}'+'</style>';
+Ext.ghg.countries = [
+    ['Tanzania'],
+    ['Rwanda'],
+    ['Malawi'],
+    ['Botswana'],
+    ['Zambia'],
+    ['Namibia'],
+    ['Ethiopia'],
+    ['Uganda'],
+    ['Lesotho']
+];
 
-    //} 
-      return stylecont.innerHTML; 
-}
+Ext.ghg.years = [
+    ['2000'],
+    ['2010']
+    
+];
 
 
 Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
