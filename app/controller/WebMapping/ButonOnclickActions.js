@@ -19,6 +19,10 @@ Ext.ghg.years = [
     
 ];
 
+var _country;
+
+
+
 
 Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 	extend: 'Ext.app.Controller',
@@ -44,82 +48,70 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				}
 			},
 
-			'WebMappingViewport combobox[name=single_country_name]': {
-				select:function() {
-					single_country_value=Ext.getCmp('single_country_id').getValue(); 
+			'WebMappingViewport combobox[name=country]': {
+				select:function(valueField) {
+					_country = valueField.value;
+					// pan to country and zoom
+					//alert(allwms.length);
 
-					conservation_area_store.load({params: {country: single_country_value}});
-					towns_store.load({params: {country: single_country_value}});
+					for(var i=0; i < countrydata.length; i++){
+						if(countrydata[i].name == _country){
+							map.setCenter(
+                            	new OpenLayers.LonLat(countrydata[i].centerX, countrydata[i].centerY).transform(
+                                	new OpenLayers.Projection("EPSG:4326"),
+                                	map.getProjectionObject() ), countrydata[i].zoomLevel);
 
-					conservation_area_combo=Ext.getCmp('single_conservation_area_id');
-					nearby_conservation_area_combo=Ext.getCmp('single_nearby_conservation_area_id');						
-					single_town_combo=Ext.getCmp('single_town_id');
+									
+									// turn on selected country and turn off other countries
+									
+									for(var k=0; k < allwms.length; k++){
+										var ghglayer = map.getLayersByName(allwms[k]);
+										ghglayer[0].setVisibility(false);
+									}
+									/*
+									var _layer = map.getLayersByName(_basin);
+									_layer[0].setVisibility(true);
 
-					if (single_country_value!=='')  {
-						conservation_area_combo.enable(); 
-						nearby_conservation_area_combo.enable();                             
-						single_town_combo.enable();      
+									// load downloads grid
+									var _downgrid = Ext.getCmp('downgrid').getStore();
+									_downgrid.removeAll();
 
+									if (countrydata[i].basins[j].link != "") {
+										var _link = "<a href='" + countrydata[i].basins[j].link + "'>" + countrydata[i].basins[j].name + " Results</a>";
+										var results = [
+											{label1: _link}
+										];
+
+										_downgrid.loadData(results);
+									}
+									*/		
+
+							
+							
+
+
+						}
 					}
+					
 					
 				}
 			},
 
 			'WebMappingViewport combobox[name=range_country_name]': {
 				select:function() {
-					range_country_value=Ext.getCmp('range_country_id').getValue(); 
-
-					conservation_area_store.load({params: {country: range_country_value}});
-					towns_store.load({params: {country: range_country_value}});
-
-					conservation_area_combo=Ext.getCmp('range_conservation_area_id');
-					nearby_conservation_area_combo=Ext.getCmp('range_nearby_conservation_area_id');                        
-					range_town_combo=Ext.getCmp('range_town_id');
-
-					if (range_country_value!=='')  {
-						conservation_area_combo.enable(); 
-						nearby_conservation_area_combo.enable();                             
-						range_town_combo.enable();      
-
-					}
+					
 					
 				}
 			},   
 			'WebMappingViewport combobox[name=custom_country_name]': {
 				select:function() {
-					custom_country_value=Ext.getCmp('custom_country_id').getValue(); 
-
-					conservation_area_store.load({params: {country: custom_country_value}});
-					towns_store.load({params: {country: custom_country_value}});
-
-					conservation_area_combo=Ext.getCmp('custom_conservation_area_id');
-					nearby_conservation_area_combo=Ext.getCmp('custom_nearby_conservation_area_id');                        
-					custom_town_combo=Ext.getCmp('custom_town_id');
-
-					if (custom_country_value!=='')  {
-						conservation_area_combo.enable(); 
-						nearby_conservation_area_combo.enable();                             
-						custom_town_combo.enable();      
-
-					}
+					
 					
 				}
 			}, 
 			'WebMappingViewport combobox[name=subscribe_country_name]': {
 				select:function() {
-					subscribe_country_value=Ext.getCmp('subscribe_country_id').getValue(); 
-
-					conservation_area_store.load({params: {country: subscribe_country_value}});
-					towns_store.load({params: {country: subscribe_country_value}});
-
-					subscribe_conservation_area_combo=Ext.getCmp('subscribe_conservation_area_id');                       
-					subscribe_country_check=Ext.getCmp('subscribe_country_check_id');
-
-					if (subscribe_country_value!=='')  {
-						subscribe_conservation_area_combo.enable();                           
-						subscribe_country_check.enable();      
-
-					}
+					
 					
 				}
 			},  			

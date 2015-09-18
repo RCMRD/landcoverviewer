@@ -125,7 +125,8 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                     name: 'scheme',
                     value: 'scheme1',
                     fieldLabel: 'Classification Scheme',
-                    boxLabel: 'Scheme I'
+                    boxLabel: 'Scheme I',
+                    checked: true
                 },{
                     xtype: 'radiofield',
                     name: 'scheme',
@@ -235,7 +236,7 @@ WestPanel = new Ext.Panel({
          }
      },
      lines: false,
-     layers: ["Tanzania 2000 Scheme I"]
+     layers: ["tanzania_landcover_2000_scheme_i"]
  });
 
  legend_popup = new Ext.Window({

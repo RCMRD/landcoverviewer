@@ -24,7 +24,7 @@ Ext.define('LandCover.controller.WebMapping.MapPanel',
 {
 	extend: 'Ext.app.Controller',	
 	views: 	['WebMapping.MapPanel','WebMapping.GeoExtMapPanel','WebMapping.MainToolbar' ],
-	controllers: ['WebMapping.ButonOnclickActions'],
+	controllers: ['WebMapping.ButonOnclickActions', 'WebMapping.countryConfigs'],
     initComponent: function() 
 	{
 

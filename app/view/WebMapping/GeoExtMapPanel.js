@@ -82,7 +82,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
             }
         );
 
-        var ghg_wms = new OpenLayers.Layer.WMS("Tanzania 2000 Scheme I",
+        var ghg_wms = new OpenLayers.Layer.WMS("tanzania_landcover_2000_scheme_i",
                     "http://geoportal.rcmrd.org/geoserver/wms",
                     {
                         layers: 'servir:tanzania_landcover_2000_scheme_i',
@@ -99,8 +99,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     
                 );
 
-
-
+       
 
         var maxExtent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
         restrictedExtent = maxExtent.clone();
