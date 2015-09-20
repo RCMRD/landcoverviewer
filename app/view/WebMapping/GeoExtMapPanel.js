@@ -1,3 +1,5 @@
+var ghg_wms;
+
 Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 {
 	extend: 'GeoExt.panel.Map',
@@ -82,7 +84,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
             }
         );
 
-        var ghg_wms = new OpenLayers.Layer.WMS("tanzania_landcover_2000_scheme_i",
+        ghg_wms = new OpenLayers.Layer.WMS("tanzania_landcover_2000_scheme_i",
                     "http://geoportal.rcmrd.org/geoserver/wms",
                     {
                         layers: 'servir:tanzania_landcover_2000_scheme_i',

@@ -63,10 +63,42 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 									
 									// turn on selected country and turn off other countries
+									//alert(countrydata[i].wmsLayers.length);
 									
 									for(var k=0; k < allwms.length; k++){
 										var ghglayer = map.getLayersByName(allwms[k]);
-										ghglayer[0].setVisibility(false);
+										if(ghglayer.length != 0){
+											//ghglayer[0].setVisibility(false);
+											map.removeLayer(ghglayer[0]);
+										}
+										
+									}
+
+									//map.removeLayer(ghg_wms);
+									
+
+
+									for(var l=0; l < countrydata[i].wmsLayers.length; l++){
+
+										//alert(countrydata[i].wmsLayers[l]);
+
+										var wms_layer = new OpenLayers.Layer.WMS(countrydata[i].wmsLayers[l],
+						                    "http://geoportal.rcmrd.org/geoserver/wms",
+						                    {
+						                        layers: 'servir:' + countrydata[i].wmsLayers[l],
+						                        transparent: true,
+						                        format: "image/png"
+						                    }, {
+						                           buffer: 0,
+						                            visibility: true,
+						                            displayOutsideMaxExtent: true,
+						                            displayInLayerSwitcher: true,
+						                            isBaseLayer: false,
+						                            yx : {'EPSG:4326' : true}
+						                    }
+						                    
+						                );
+						                map.addLayer(wms_layer);
 									}
 									/*
 									var _layer = map.getLayersByName(_basin);
