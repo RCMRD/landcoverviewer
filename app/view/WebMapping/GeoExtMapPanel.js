@@ -1,4 +1,4 @@
-var ghg_wms;
+var ghg_wms1, ghg_wms2, ghg_wms3, ghg_wms4;
 
 Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 {
@@ -84,7 +84,9 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
             }
         );
 
-        ghg_wms = new OpenLayers.Layer.WMS("tanzania_landcover_2000_scheme_i",
+        
+
+        ghg_wms1 = new OpenLayers.Layer.WMS("tanzania_landcover_2000_scheme_i",
                     "http://geoportal.rcmrd.org/geoserver/wms",
                     {
                         layers: 'servir:tanzania_landcover_2000_scheme_i',
@@ -100,6 +102,58 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     }
                     
                 );
+
+        ghg_wms2 = new OpenLayers.Layer.WMS("tanzania_landcover_2000_scheme_ii",
+                    "http://geoportal.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'servir:tanzania_landcover_2000_scheme_ii',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
+
+        ghg_wms3 = new OpenLayers.Layer.WMS("tanzania_landcover_2010_scheme_i",
+                    "http://geoportal.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'servir:tanzania_landcover_2010_scheme_i',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
+
+        ghg_wms4 = new OpenLayers.Layer.WMS("tanzania_landcover_2010_scheme_ii",
+                    "http://geoportal.rcmrd.org/geoserver/wms",
+                    {
+                        layers: 'servir:tanzania_landcover_2010_scheme_ii',
+                        transparent: true,
+                        format: "image/png"
+                    }, {
+                           buffer: 0,
+                            visibility: false,
+                            displayOutsideMaxExtent: true,
+                            displayInLayerSwitcher: true,
+                            isBaseLayer: false,
+                            yx : {'EPSG:4326' : true}
+                    }
+                    
+                );
+
 
        
 
@@ -141,7 +195,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ghg_wms, mapquest, mapbox_street]);
+        map.addLayers([ghg_wms1, ghg_wms2, ghg_wms3, ghg_wms4, mapquest, mapbox_street]);
 
         //No Internet
         //map.addLayers([africa_outline]);

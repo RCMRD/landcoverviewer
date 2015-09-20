@@ -29,7 +29,7 @@ layers_tree_store = Ext.create('Ext.data.TreeStore', {
 });
 
 layer_legend_tree = Ext.create('GeoExt.tree.Panel', {
-	title: "Layers",
+	title: "",
 	autoScroll: true,
     collapsible: true,
     //preventHeader: true,
@@ -186,6 +186,50 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
         height: 100
     });
 
+    GeoExtPanel = new Ext.Panel ({
+        region: 'west',
+        xtype: 'panel',
+        width: 300,
+        minWidth: 200,
+        height: 400, 
+        active:true,
+       // maxWidth: 500,
+        listeners: {
+            resize: Ext.Function.bind(function(comp, width, height,
+                    oldWidth, oldHeight, eOpts) {
+                comp.doLayout();
+            }, this)
+        },
+        title: 'Layers',
+        collapsible: true,
+        split: true,
+        items: [layer_legend_tree, SingleSearchForm]
+
+    }); 
+
+var GeneralTabs = Ext.create('Ext.tab.Panel', {
+    id: "generaltabsID",
+    layout: 'card',
+    region: 'west',
+    width:330,
+    minWidth:200,
+    height: 400, 
+    animate: true,
+    preventHeader: true,
+     hideCollapseTool: true,
+    collapsible: true,
+    activeTab: 0,
+    split: true,
+    tabPosition: 'top',
+    items: [
+            GeoExtPanel, 
+        {
+            title: 'Downloads',
+            items:[downloads]
+        }
+    ]
+});
+
  function fix_to_bottom(){
 
      if (legend_popup.collapsed){
@@ -198,14 +242,15 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
 WestPanel = new Ext.Panel({  
     region: 'west',
     xtype: 'panel',
-    width: 300,
+    width: 330,
     minWidth: 200,
     collapsible: true,
     title: 'Map',
    // preventHeader: true,
     //  hideCollapseTool: true,
     split: true,
-    items: [layer_legend_tree, SingleSearchForm, downloads, LogoPanel],
+    //items: [layer_legend_tree, SingleSearchForm, downloads, LogoPanel],
+    items: [GeneralTabs, LogoPanel],
     listeners: {
         collapse: function() {
             fix_to_bottom();
@@ -223,7 +268,7 @@ WestPanel = new Ext.Panel({
      autoScroll: true,
      header:false,
      id:"legend_id",
-     width:200,
+     width:240,
      height:205,
      collapsible: true,
      defaults: {
@@ -236,13 +281,15 @@ WestPanel = new Ext.Panel({
          }
      },
      lines: false,
-     layers: ["tanzania_landcover_2000_scheme_i"]
+     layers: ["tanzania_landcover_2000_scheme_i", "tanzania_landcover_2000_scheme_ii",
+                "tanzania_landcover_2010_scheme_i", "tanzania_landcover_2010_scheme_ii"]
+     
  });
 
  legend_popup = new Ext.Window({
      extend: 'Ext.window.Window',
      title:'Legend',
-     width: 200,
+     width: 240,
      id:'legend_popup_id',
      minimizable: true,
      closable:false,
