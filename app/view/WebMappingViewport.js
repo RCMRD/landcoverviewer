@@ -162,13 +162,16 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
 	]
 });
 
- // create the Downloads Store
+    var down_urls = [];
+    for(var b=0; b < countrydata[0].downLoadURLs.length; b++){
+        //var _link = countrydata[0].downLoadURLs[b];
+        var _link = "<a href='" + countrydata[0].downLoadURLs[b] + "'>" + countrydata[0].downLoadURLs[b] + "</a>";
+        down_urls.push({label1: _link});
+    }
+    // create the Downloads Store
    var downstore = Ext.create('Ext.data.Store', {
     model: 'Download',
-    data: [
-        //{label1: 'Nzoia Results'}
-
-    ]
+    data: down_urls
 
    });
 
@@ -177,13 +180,13 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
         store: downstore,
         id: 'downgrid',
         columns: [
-            {text: "Downloads", width: 180, dataIndex: 'label1'}
+            {text: "Downloads", width: 320, dataIndex: 'label1'}
             
             
         ],
         //renderTo:'example-grid',
-        width: 200,
-        height: 100
+        width: 320,
+        height: 250
     });
 
     GeoExtPanel = new Ext.Panel ({

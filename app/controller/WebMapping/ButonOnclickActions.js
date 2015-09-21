@@ -76,8 +76,6 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 									//map.removeLayer(ghg_wms);
 									
-
-
 									for(var l=0; l < countrydata[i].wmsLayers.length; l++){
 
 										//alert(countrydata[i].wmsLayers[l]);
@@ -100,27 +98,21 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						                );
 						                map.addLayer(wms_layer);
 									}
-									/*
-									var _layer = map.getLayersByName(_basin);
-									_layer[0].setVisibility(true);
+									
 
 									// load downloads grid
 									var _downgrid = Ext.getCmp('downgrid').getStore();
 									_downgrid.removeAll();
 
-									if (countrydata[i].basins[j].link != "") {
-										var _link = "<a href='" + countrydata[i].basins[j].link + "'>" + countrydata[i].basins[j].name + " Results</a>";
-										var results = [
-											{label1: _link}
-										];
+									var downloads_data = [];
 
-										_downgrid.loadData(results);
+									for(var m=0; m < countrydata[i].downLoadURLs.length; m++){
+										//var _link = countrydata[i].downLoadURLs[m];
+										var _link = "<a href='" + countrydata[i].downLoadURLs[m] + "'>" + countrydata[i].downLoadURLs[m] + "</a>";
+										downloads_data.push({label1: _link});
 									}
-									*/		
 
-							
-							
-
+									_downgrid.loadData(downloads_data);
 
 						}
 					}
