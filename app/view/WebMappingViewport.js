@@ -155,9 +155,9 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
 	[
 		{
 			text: 'Statistics',
-            id:'singleSearchButtonId',
+            id:'stats_button',
 			width: 50,
-			action: 'singleSearchAction'
+			action: 'loadStats'
 		}
 	]
 });
@@ -284,8 +284,8 @@ WestPanel = new Ext.Panel({
          }
      },
      lines: false,
-     layers: ["tanzania_landcover_2000_scheme_i", "tanzania_landcover_2000_scheme_ii",
-                "tanzania_landcover_2010_scheme_i", "tanzania_landcover_2010_scheme_ii"]
+     layers: ["ethiopia_landcover_2003_scheme_i", "ethiopia_landcover_2003_scheme_ii",
+                "ethiopia_landcover_2008_scheme_i", "ethiopia_landcover_2008_scheme_ii"]
      
  });
 
@@ -320,7 +320,7 @@ WestPanel = new Ext.Panel({
              var window = owner.up('window');
              window.setWidth(200);
              window.expand('', false);
-             window.anchorTo("GeoExtMapPanelId", "bl", [0, -235]);
+             window.anchorTo("GeoExtMapPanelId", "bl", [0, -350]);
              Ext.select('#legend_popup_id .x-tool-restore').setStyle('display', 'none');
              Ext.select('#legend_popup_id .x-tool-minimize').setStyle('display', 'block');
          }
@@ -331,7 +331,7 @@ WestPanel = new Ext.Panel({
 
 
      legend_popup.show();
-     legend_popup.anchorTo("GeoExtMapPanelId", "bl", [0, -235]);
+     legend_popup.anchorTo("GeoExtMapPanelId", "bl", [0, -350]);
      window.onresize = function() {
          fix_to_bottom();
      };
@@ -358,14 +358,29 @@ WestPanel = new Ext.Panel({
 					region: 'north',
 					height: 60, //orignal 60
 					html: '<div class="fire"><div class="satimage"><div class="fireimage"><div class="topcont">' +
-                    '<div class="logobox"><a target="new" href="http://rcmrd.org/"><img alt="RCMRD" width="153"' +
+                    '<div class="logobox"><a href=""><img alt="RCMRD" width="153"' +
                     ' height="53" class="rcmrd" src="assets/images/rcmrd.png"></a></div><h1 class="topheader">'+
 					'Land Cover Viewer</h1></div></div></div></div>'
 				},
 				{
 					xtype: 'MapPanel'
 				},
-                 WestPanel
+                 WestPanel,
+                 {
+                    // south panel
+                    region: 'south',
+                    id: 'chart',
+                    contentEl: 'chart_div',
+                    autoScroll: true,
+                    split: true,
+                    height: 200,
+                    minSize: 100,
+                    maxSize: 200,
+                    collapsible: true,
+                    collapsed: true,
+                    title: 'Statistics',
+                    margins: '0 0 0 0'
+                }
 			]
         });
         me.callParent(arguments);

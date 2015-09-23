@@ -30,20 +30,39 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 		
 		this.control(
 		{		
-			'WebMappingViewport button[action=singleSearchAction]':
+			'WebMappingViewport button[action=loadStats]':
 			{
 				click:function() {
 
-					var loadingPanel = new OpenLayers.Control.LoadingPanel();
-					map.addControl(loadingPanel);    
-							//show the control
-							loadingPanel.maximizeControl();
-					// load your layers here
-					// remove it as the above function returns
-					//flag="no_flag";
-					single_search();
+					Ext.getCmp('chart').expand();
+
+					var ghgdata = [
+						['Land Cover', 'Area(Ha)']
+					]
+
+					//ghgdata.push(ghgstats[4].stats);
+
+					var data = google.visualization.arrayToDataTable(ghgstats[4].stats);
 					
-					loadingPanel.minimizeControl();
+			        var options = {
+				        title: 'Land Cover Statistics',
+				        //chartArea: {width: '80%'},
+				        width: 800,
+				        height: 150,
+				        hAxis: {
+				          title: 'Area(Hectares)',
+				          minValue: 0
+				        },
+				        legend: { position: 'none' }
+				        //vAxis: {
+				        //  title: 'Land Cover'
+				        //}
+				      };
+					
+
+			        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+			        chart.draw(data, options);
 					
 				}
 			},

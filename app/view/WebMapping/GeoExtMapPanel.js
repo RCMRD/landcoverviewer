@@ -86,10 +86,10 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
         
 
-        ghg_wms1 = new OpenLayers.Layer.WMS("tanzania_landcover_2000_scheme_i",
+        ghg_wms1 = new OpenLayers.Layer.WMS("ethiopia_landcover_2003_scheme_i",
                     "http://geoportal.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:tanzania_landcover_2000_scheme_i',
+                        layers: 'servir:ethiopia_landcover_2003_scheme_i',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -103,10 +103,10 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     
                 );
 
-        ghg_wms2 = new OpenLayers.Layer.WMS("tanzania_landcover_2000_scheme_ii",
+        ghg_wms2 = new OpenLayers.Layer.WMS("ethiopia_landcover_2003_scheme_ii",
                     "http://geoportal.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:tanzania_landcover_2000_scheme_ii',
+                        layers: 'servir:ethiopia_landcover_2003_scheme_ii',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -120,10 +120,10 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     
                 );
 
-        ghg_wms3 = new OpenLayers.Layer.WMS("tanzania_landcover_2010_scheme_i",
+        ghg_wms3 = new OpenLayers.Layer.WMS("ethiopia_landcover_2008_scheme_i",
                     "http://geoportal.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:tanzania_landcover_2010_scheme_i',
+                        layers: 'servir:ethiopia_landcover_2008_scheme_i',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -137,10 +137,10 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                     
                 );
 
-        ghg_wms4 = new OpenLayers.Layer.WMS("tanzania_landcover_2010_scheme_ii",
+        ghg_wms4 = new OpenLayers.Layer.WMS("ethiopia_landcover_2008_scheme_ii",
                     "http://geoportal.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:tanzania_landcover_2010_scheme_ii',
+                        layers: 'servir:ethiopia_landcover_2008_scheme_ii',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -200,7 +200,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
         //No Internet
         //map.addLayers([africa_outline]);
 
-		map.setCenter(new OpenLayers.LonLat(34.224046,-5.613931).transform(
+		map.setCenter(new OpenLayers.LonLat(40.499395,9.1491755).transform(
 			new OpenLayers.Projection("EPSG:4326"),
 			map.getProjectionObject()
 			), 6 );
