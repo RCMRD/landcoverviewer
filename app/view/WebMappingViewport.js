@@ -98,6 +98,7 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
     bodyPadding: 10,
     id: 'single_search_id', 
     title: 'Select',
+    height: 200,
     collapsible: true,
     items: [
 
@@ -194,7 +195,8 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
         xtype: 'panel',
         width: 300,
         minWidth: 200,
-        height: 400, 
+        height: 600, 
+        autoScroll: true,
         active:true,
        // maxWidth: 500,
         listeners: {
@@ -216,7 +218,8 @@ var GeneralTabs = Ext.create('Ext.tab.Panel', {
     region: 'west',
     width:330,
     minWidth:200,
-    height: 400, 
+    //height: 600, 
+    autoScroll: true,
     animate: true,
     preventHeader: true,
      hideCollapseTool: true,

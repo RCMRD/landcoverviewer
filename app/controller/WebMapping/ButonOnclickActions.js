@@ -133,6 +133,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 									_downgrid.loadData(downloads_data);
 
+									// load years combobox
+									
+
+
+
 						}
 					}
 					
