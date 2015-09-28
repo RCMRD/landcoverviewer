@@ -137,9 +137,9 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                 },{
                     xtype: 'combobox',
                     fieldLabel: 'Year',
-                    disabled: false,
-                    name: 'year',
-                    id: 'year',
+                    disabled: true,
+                    name: 'year1',
+                    id: 'year1',
                     store: Ext.create('Ext.data.ArrayStore', {
                         fields: ['_value'],
                         data : Ext.ghg.years 

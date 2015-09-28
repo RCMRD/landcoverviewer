@@ -70,11 +70,13 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 			'WebMappingViewport combobox[name=country]': {
 				select:function(valueField) {
 					_country = valueField.value;
+
 					// pan to country and zoom
 					//alert(allwms.length);
 
 					for(var i=0; i < countrydata.length; i++){
 						if(countrydata[i].name == _country){
+							
 							map.setCenter(
                             	new OpenLayers.LonLat(countrydata[i].centerX, countrydata[i].centerY).transform(
                                 	new OpenLayers.Projection("EPSG:4326"),
@@ -118,6 +120,21 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 						                map.addLayer(wms_layer);
 									}
 									
+									// load years combobox
+									var _years = Ext.getCmp('year1');
+									_years.clearValue();
+
+
+									var _store = _years.getStore();
+									_store.removeAll();
+
+									var yrs = [];
+									for(var n=0; n < countrydata[i].schemeIyears.length; n++){
+										yrs.push([countrydata[i].schemeIyears[n]]);
+									}
+
+									_store.loadData(yrs);
+									_years.enable();
 
 									// load downloads grid
 									var _downgrid = Ext.getCmp('downgrid').getStore();
@@ -133,11 +150,10 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 									_downgrid.loadData(downloads_data);
 
-									// load years combobox
-									
 
 
 
+						
 						}
 					}
 					
