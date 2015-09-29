@@ -61,13 +61,15 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 					var sel_year = Ext.getCmp('year1').getValue();
 
 					//var _url = 'http://localhost/ghg/statistics/?country=tanzania&scheme=scheme_i&yr=2000&format=json&limit=0'
-					var _url = 'http://tools.rcmrd.org/ghg/statistics/?country='+country_sel+'&scheme='+sel_scheme+'&yr='+sel_year+'&format=json&limit=0';
+					var _url = 'http://tools.rcmrd.org/ghg/statistics/?country='+country_sel+'&scheme='+sel_scheme+'&yr='+sel_year+'&format=jsonp&limit=0';
 
 					$.ajax({
 								type: "GET",
 								url: _url,
 								async: false,
-								dataType: "json",
+								//dataType: "json",
+								crossDomain: true,
+    							dataType: 'jsonp',
 								success: function(data){
 									
 									//alert(data.objects.length);
