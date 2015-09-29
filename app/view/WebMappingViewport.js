@@ -122,18 +122,20 @@ SingleSearchForm = Ext.create('Ext.form.Panel', {
                         }
                     }
                 },{
-                    xtype: 'radiofield',
-                    name: 'scheme',
-                    value: 'scheme1',
+                    xtype: 'combobox',
                     fieldLabel: 'Classification Scheme',
-                    boxLabel: 'Scheme I',
-                    checked: true
-                },{
-                    xtype: 'radiofield',
+                    disabled: true,
                     name: 'scheme',
-                    value: 'scheme2',
-                    fieldLabel: '',
-                    boxLabel: 'Scheme II'
+                    id: 'scheme',
+                    store: Ext.create('Ext.data.ArrayStore', {
+                        fields: ['_value', '_label'],
+                        data : Ext.ghg.schemes 
+                    }),
+                    valueField: '_value',
+                    displayField: '_label',
+                    typeAhead: true,
+                    queryMode: 'local',
+                    emptyText: 'Select scheme...'
                 },{
                     xtype: 'combobox',
                     fieldLabel: 'Year',

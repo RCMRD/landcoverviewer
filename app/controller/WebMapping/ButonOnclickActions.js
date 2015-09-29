@@ -19,6 +19,12 @@ Ext.ghg.years = [
     
 ];
 
+Ext.ghg.schemes = [
+    ['scheme_i', 'Scheme I'],
+    ['scheme_ii', 'Scheme II']
+    
+];
+
 var _country;
 
 
@@ -155,6 +161,9 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 									}
 
 									_downgrid.loadData(downloads_data);
+
+									// enable schemes
+									Ext.getCmp('scheme').enable();
 
 
 
