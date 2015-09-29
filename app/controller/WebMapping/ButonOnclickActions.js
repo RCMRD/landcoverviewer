@@ -27,6 +27,17 @@ Ext.ghg.schemes = [
 
 var _country;
 
+function makeGraph(ghgdata){
+	var _gdata = [
+		['Land Cover', 'Area (Ha)']
+	];
+	for(var x=0; x < ghgdata.length; x++){
+		_gdata.push([ghgdata[x].cover, parseFloat(ghgdata[x].area)]);
+	}
+
+	return _gdata;
+	
+}
 
 
 
@@ -42,39 +53,60 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					Ext.getCmp('chart').expand();
 
-					var ghgdata = [
-						['Land Cover', 'Area(Ha)']
-					]
+					// Get selected country, scheme and year
+					var sel_country = Ext.getCmp('country').getValue();
+					var country_sel = sel_country.toLowerCase();
 
-					//ghgdata.push(ghgstats[4].stats);
+					var sel_scheme = Ext.getCmp('scheme').getValue();
+					var sel_year = Ext.getCmp('year1').getValue();
 
-					var data = google.visualization.arrayToDataTable(ghgstats[4].stats);
-					
-			        var options1 = {
-				        title: 'Land Cover Statistics',
-				        //chartArea: {width: '80%'},
-				        width: 400,
-				        height: 350,
-				        hAxis: {
-				          title: 'Area(Hectares)',
-				          minValue: 0
-				        },
-				        legend: { position: 'none' }
-				        //vAxis: {
-				        //  title: 'Land Cover'
-				        //}
-				      };
+					//var _url = 'http://localhost/ghg/statistics/?country=tanzania&scheme=scheme_i&yr=2000&format=json&limit=0'
+					var _url = 'http://localhost/ghg/statistics/?country='+country_sel+'&scheme='+sel_scheme+'&yr='+sel_year+'&format=json&limit=0';
 
-				      var options2 = {
-				          title: 'Land Cover Statistics'
-				        };
-					
+					$.ajax({
+								type: "GET",
+								url: _url,
+								async: false,
+								dataType: "json",
+								success: function(data){
+									
+									//alert(data.objects.length);
+									var graph_data = makeGraph(data.objects);
 
-			        var chart1 = new google.visualization.BarChart(document.getElementById('chart1_div'));
-			        chart1.draw(data, options1);
+									var data = google.visualization.arrayToDataTable(graph_data);
 
-			         var chart2 = new google.visualization.PieChart(document.getElementById('chart2_div'));
-        			chart2.draw(data, options2);
+							        var options1 = {
+								        title: 'Land Cover Statistics for '+sel_country+' '+sel_year+' '+sel_scheme,
+								        //chartArea: {width: '80%'},
+								        width: 400,
+								        height: 350,
+								        hAxis: {
+								          title: 'Area(Hectares)',
+								          minValue: 0
+								        },
+								        legend: { position: 'none' }
+								        //vAxis: {
+								        //  title: 'Land Cover'
+								        //}
+								      };
+
+								      var options2 = {
+								          title: 'Land Cover Statistics for '+sel_country+' '+sel_year+' '+sel_scheme 
+								        };
+
+							        var chart1 = new google.visualization.BarChart(document.getElementById('chart1_div'));
+							        chart1.draw(data, options1);
+
+							         var chart2 = new google.visualization.PieChart(document.getElementById('chart2_div'));
+				        			chart2.draw(data, options2);
+
+
+
+								}
+
+							});
+
+		        
 					
 				}
 			},
