@@ -330,6 +330,38 @@ WestPanel = new Ext.Panel({
      }]
  });
 
+ var chart_1 = new Ext.Panel({
+        //region: 'west',
+        xtype: 'panel',
+        width: 300,
+        //minWidth: 200,
+        height: 400, 
+        autoScroll: true,
+        active:true,
+       // maxWidth: 500,
+        // title: 'Layers',
+        collapsible: true,
+        split: true,
+        contentEl: 'chart1_div',
+
+    }); 
+
+ var chart_2 = new Ext.Panel({
+        //region: 'west',
+        xtype: 'panel',
+        width: 300,
+        //minWidth: 200,
+        height: 400, 
+        autoScroll: true,
+        active:true,
+       // maxWidth: 500,
+        // title: 'Layers',
+        collapsible: true,
+        split: true,
+        contentEl: 'chart2_div',
+
+    }); 
+
  Ext.onReady(function(){
 
 
@@ -370,10 +402,11 @@ WestPanel = new Ext.Panel({
 				},
                  WestPanel,
                  {
-                    // south panel
+                    // statistics panel
+                    xtype: 'panel',
                     region: 'east',
                     id: 'chart',
-                    contentEl: 'chart_div',
+                    //contentEl: 'chart_div',
                     autoScroll: true,
                     split: true,
                     //height: 200,
@@ -384,7 +417,8 @@ WestPanel = new Ext.Panel({
                     collapsible: true,
                     collapsed: true,
                     title: 'Statistics',
-                    margins: '0 0 0 0'
+                    margins: '0 0 0 0',
+                    items: [chart_1, chart_2]
                 }
 			]
         });

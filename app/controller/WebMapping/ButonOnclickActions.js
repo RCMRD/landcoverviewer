@@ -44,11 +44,11 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 
 					var data = google.visualization.arrayToDataTable(ghgstats[4].stats);
 					
-			        var options = {
+			        var options1 = {
 				        title: 'Land Cover Statistics',
 				        //chartArea: {width: '80%'},
-				        width: 250,
-				        height: 550,
+				        width: 400,
+				        height: 350,
 				        hAxis: {
 				          title: 'Area(Hectares)',
 				          minValue: 0
@@ -58,11 +58,17 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 				        //  title: 'Land Cover'
 				        //}
 				      };
+
+				      var options2 = {
+				          title: 'Land Cover Statistics'
+				        };
 					
 
-			        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+			        var chart1 = new google.visualization.BarChart(document.getElementById('chart1_div'));
+			        chart1.draw(data, options1);
 
-			        chart.draw(data, options);
+			         var chart2 = new google.visualization.PieChart(document.getElementById('chart2_div'));
+        			chart2.draw(data, options2);
 					
 				}
 			},
