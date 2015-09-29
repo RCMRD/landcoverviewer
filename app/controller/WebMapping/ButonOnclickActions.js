@@ -47,8 +47,8 @@ Ext.define('LandCover.controller.WebMapping.ButonOnclickActions', {
 			        var options = {
 				        title: 'Land Cover Statistics',
 				        //chartArea: {width: '80%'},
-				        width: 800,
-				        height: 150,
+				        width: 250,
+				        height: 550,
 				        hAxis: {
 				          title: 'Area(Hectares)',
 				          minValue: 0
