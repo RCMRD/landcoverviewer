@@ -185,7 +185,7 @@ var countrydata = [
 				    "classficationEpochs":"2",				   
 				    "serviceUrl":"http://maps.rcmrd.org/arcgis/rest/services/Uganda/UgandaEnvironmentGHGLandCoverMapService/MapServer",
 				    "serviceUrl_vector":"http://maps.rcmrd.org/arcgis/rest/services/Uganda/UgandaEnvironmentGHGLandCoverMapService/MapServer",	
-				    "downLoadURLs":["http://geoportal.rcmrd.org/data/Uganda_LandCover_2000_Scheme_I.zip","http://geoportal.rcmrd.org/data/Zambia_LandCover_2000_Scheme_II.zip","http://geoportal.rcmrd.org/data/Zambia_LandCover_2010_Scheme_I.zip","http://geoportal.rcmrd.org/data/Zambia_LandCover_2010_Scheme_II.zip"],		    
+				    "downLoadURLs":["http://geoportal.rcmrd.org/data/Uganda_LandCover_2000_Scheme_I.zip","http://geoportal.rcmrd.org/data/Uganda_LandCover_2000_Scheme_II.zip","http://geoportal.rcmrd.org/data/Uganda_LandCover_2014_Scheme_I.zip","http://geoportal.rcmrd.org/data/Uganda_LandCover_2014_Scheme_II.zip"],		    
 				  	"schm_I_Legend_URLs":"http://maps.rcmrd.org/arcgis/services/Uganda/UgandaEnvironmentGHGLandCoverMapService/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=3",
 				  	"schm_II_Legend_URLs":"http://maps.rcmrd.org/arcgis/services/Uganda/UgandaEnvironmentGHGLandCoverMapService/MapServer/WmsServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=0",				    
 					 "boundaryType":"District,Region,Country",
