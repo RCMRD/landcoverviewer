@@ -1,0 +1,75 @@
+=======================
+CREST Flood Simulator Documentation
+=======================
+
+Welcome to CREST Flood Simulator Documentation.
+
+The CREST stream flow viewer and flood simulator has the capability to generate a flood map from gauged values for basins that do not have CREST and from CREST outputs. 
+
+First Steps
+===========
+
+The following sections give an overview of CREST Flood Simulator from different perspectives, they are targeted at a non-technical audience and the quick installation guide at people who just want to get it installed and will come back later to the complete documentation.
+
+
+How To Use The Documentation
+============================
+
+The documentation is geared toward three distinct types of users:
+
+ #. **Users**: Are people who log into the CREST Flood Simulator online application and use its functionality. 
+ #. **Administrators**: Are people who install and deploy CREST Flood Simulator instances in production for their Users. 
+ #. **Developers**:  Are people who write code to add functionality, integrate with other systems, fix bugs, and potentially help an Administrator setup a server and deploy a CREST Flood Simulator instance for production. 
+
+
+The documentation is divided into three sections:
+
+ #. :doc:`Tutorials: <tutorials/index>` Step-by-step instructions in workshop format that help a user to accomplish a set of tasks.
+ #. :doc:`Reference: <reference/index>` Architecture, component information, API descriptions etc. 
+ 
+
+Table of contents
+=================
+
+Tutorials
+---------
+
+The :doc:`Tutorials <tutorials/index>` section contains step-by-step workshops that are oriented around performing particular sets of tasks, like adding data or publishing maps, setting up and maintaining a server. These tutorials are written in a workshop like format and are broken into three groups: Users, Administrators and Developers.
+
+.. toctree::
+    :maxdepth: 5
+
+    tutorials/index 
+
+Reference
+---------
+
+The :doc:`Reference <reference/index>` section provides details about the internals of the CREST Flood Simulator. It has background information about components that make up the CREST Flood Simulator, the security system, APIs and much more.
+
+.. toctree::
+    :maxdepth: 5
+
+    reference/index
+
+
+
+Need Help?
+==========
+
+Having trouble? Cant find what you are looking for? We'd like to help!
+
+ * Search for information in the `archives of the CREST Flood Simulator mailing list`_, or
+   `post a question`_.
+
+ * Ask a question in the `#crestfloodsimulator IRC channel`_ using
+   `Freenode's web based client`_.
+
+ * Report bugs with CREST Flood Simulator in our `ticket tracker`_.
+
+.. _ticket tracker: http://github.com/RCMRD/crestfloodsimulator/issues
+
+.. toctree::
+   :maxdepth: 4
+
+   tutorials
+   reference
