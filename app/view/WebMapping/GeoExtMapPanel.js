@@ -67,6 +67,10 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 transitionEffect: 'resize'
             });
 
+        var esri_topo_map = new OpenLayers.Layer.XYZ( "ESRI",
+            "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}",
+            {sphericalMercator: true} );
+
         var mapquest = new OpenLayers.Layer.XYZ(
             "Imagery",
             [
@@ -195,7 +199,7 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
 
 
         //When there is internet use this
-        map.addLayers([ghg_wms1, ghg_wms2, ghg_wms3, ghg_wms4, mapquest, mapbox_street]);
+        map.addLayers([ghg_wms1, ghg_wms2, ghg_wms3, ghg_wms4, esri_topo_map, mapbox_street]);
 
         //No Internet
         //map.addLayers([africa_outline]);
