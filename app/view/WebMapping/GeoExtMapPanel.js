@@ -91,9 +91,9 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
         
 
         ghg_wms1 = new OpenLayers.Layer.WMS("ethiopia_landcover_2003_scheme_i",
-                    "http://geoportal.rcmrd.org/geoserver/wms",
+                    "https://maps.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:ethiopia_landcover_2003_scheme_i',
+                        layers: 'lulc:ethiopia_landcover_2003_scheme_i',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -108,9 +108,9 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         ghg_wms2 = new OpenLayers.Layer.WMS("ethiopia_landcover_2003_scheme_ii",
-                    "http://geoportal.rcmrd.org/geoserver/wms",
+                    "https://maps.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:ethiopia_landcover_2003_scheme_ii',
+                        layers: 'lulc:ethiopia_landcover_2003_scheme_ii',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -125,9 +125,9 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         ghg_wms3 = new OpenLayers.Layer.WMS("ethiopia_landcover_2008_scheme_i",
-                    "http://geoportal.rcmrd.org/geoserver/wms",
+                    "https://maps.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:ethiopia_landcover_2008_scheme_i',
+                        layers: 'lulc:ethiopia_landcover_2008_scheme_i',
                         transparent: true,
                         format: "image/png"
                     }, {
@@ -142,9 +142,9 @@ Ext.define('LandCover.view.WebMapping.GeoExtMapPanel',
                 );
 
         ghg_wms4 = new OpenLayers.Layer.WMS("ethiopia_landcover_2008_scheme_ii",
-                    "http://geoportal.rcmrd.org/geoserver/wms",
+                    "https://maps.rcmrd.org/geoserver/wms",
                     {
-                        layers: 'servir:ethiopia_landcover_2008_scheme_ii',
+                        layers: 'lulc:ethiopia_landcover_2008_scheme_ii',
                         transparent: true,
                         format: "image/png"
                     }, {
